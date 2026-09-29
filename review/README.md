@@ -1,0 +1,87 @@
+# 综述成稿：嵌入式端边智能赋能智慧农业
+
+《嵌入式软件》课程作业（Word 图文版），基于 `research_pack_smart_agriculture/` 素材包撰写，并做了补充检索和原文核对。
+
+## 交付物
+
+| 文件 | 说明 |
+|---|---|
+| `嵌入式端边智能赋能智慧农业综述.docx` | **提交用 Word 成稿**：封面、中英文摘要、目录、7 章正文、16 幅图、4 个三线表、53 条 GB/T 7714 参考文献 |
+| `嵌入式端边智能赋能智慧农业综述_预览.pdf` | LibreOffice 渲染的预览，共 32 页（替代字体渲染，分页与 Word 会略有差异） |
+| `figures/` | 全部图片：`fig_*.png` 为自绘图（300 dpi），`paper_*.jpg` 为论文原图（CC BY 4.0） |
+| `src/` | 可复现的生成脚本与正文源文件（见文末“重新生成”） |
+
+正文约 **11,400 字**（Word 字数口径，不含图题、表格与参考文献），在作业要求的 8000–12000 字范围内。
+
+## 你需要手动处理的事项
+
+1. **封面信息**：填写姓名、学号、专业班级、指导教师（第 1 页的下划线处）。
+2. **生成目录**：Word 打开时提示“是否更新域”，选“是”即可生成带页码的目录；若未提示，右键目录区域 →“更新域”。WPS：点击目录区域 →“更新目录”，或“引用 → 更新目录”。
+3. **格式要求**：文档按常见中文课程论文格式排版（A4；正文宋体小四、固定值 20 磅；标题黑体；图题、表题五号）。若老师另有格式要求，可直接在 Word 里修改“正文/标题 1/标题 2”样式，或改 `src/build_docx.js` 后重新生成。
+4. **通读与个人化**：建议通读全文，把部分表述改成你自己的理解和语言，并遵守课程关于 AI 辅助写作的规定。
+5. **存疑数据的取舍**：P10/P12/P14/P15 几篇论文的部分数值内部存在矛盾，正文已作为“测量口径问题”加以分析并注明“作者报告”。如果老师更看重简洁，可以把第 4 章中对这些矛盾的分析压缩为一两句。
+
+## 文章结构
+
+1 引言（背景、为什么要端边化、范围与方法）→ 2 技术基础（硬件三档、轻量化、工具链、嵌入式软件栈、端边云架构）→ 3 应用现状（病虫害诱控、杂草与靶向施药、果实估产、作物监测、植保无人机）→ 4 关键权衡（时延、带宽、量化与能效、端边云对比、可靠性与安全）→ 5 挑战与局限 → 6 发展趋势 → 7 结论。
+
+## 图表清单
+
+| 编号 | 文件 | 类型 / 来源 |
+|---|---|---|
+| 图1 | `fig_framework.png` | 自绘：本文分析框架 |
+| 图2 | `fig_hardware_spectrum.png` | 自绘：8 款硬件的标称算力与功耗口径（数据：厂商官方资料） |
+| 图3 | `fig_compression_taxonomy.png` | 自绘：模型轻量化分层分类 |
+| 图4 | `fig_deployment_pipeline.png` | 自绘：部署工具链与 OTA 运维闭环 |
+| 图5 | `paper_P14_fig1_hailo_deployment_flow.jpg` | 论文原图：Salem & Rabia 2026，CC BY 4.0 |
+| 图6 | `fig_software_stack.png` | 自绘：嵌入式软件栈与横切关注点 |
+| 图7 | `fig_cloud_edge_device.png` | 自绘：端—边—云协同架构 |
+| 图8 | `fig_application_maturity.png` | 自绘：应用全景与证据成熟度矩阵 |
+| 图9 | `paper_P13_fig2_pest_trap_prototype.jpg` | 论文原图：Wang 等 2026，CC BY 4.0 |
+| 图10 | `paper_P11_fig3_tomato_robot_hardware.jpg` | 论文原图：Liu 等 2025，CC BY 4.0 |
+| 图11 | `fig_latency_budget.png` | 自绘：P13 时延构成 + 移动作业时延—位移换算（示意） |
+| 图12 | `fig_hailo_quant_timing.png` | 自绘：P14 量化精度损失与计时口径疑点（数据：P14 表1） |
+| 图13 | `fig_precision_tradeoff.png` | 自绘：P10 FP32/FP16/INT8 权衡（数据：P10 表9） |
+| 图14 | `fig_edge_cloud_hybrid.png` | 自绘：P15 本地/云端/混合对比（数据：P15 表1） |
+| 图15 | `paper_P14_fig2_crop_weed_distribution.jpg` | 论文原图：Salem & Rabia 2026，CC BY 4.0 |
+| 图16 | `fig_timeline.png` | 自绘：方法、硬件、应用与政策时间线 |
+
+论文原图均保持原样，仅将 webp 转为 jpg（CC BY 4.0 允许的格式转换），图题注明出处。素材包中许可未知的官方产品图（I10–I12）和 CC BY-NC-ND 图（I09）未使用。自绘图配色经 dataviz 调色板校验脚本检查（色觉障碍区分度达标），凡由原文数值推算的量均在图中标注“推算”或“示意”。
+
+## 相对素材包的补充与更正
+
+**新增来源（均已打开原文核对）**
+
+- [P16] Gong 等，*Edge Computing-Enabled Smart Agriculture*，Sensors 2025（第 4 篇综述，用于边缘计算瓶颈分析）
+- [P17] Žalik & Žalik，*A Review of Federated Learning in Agriculture*，Sensors 2023（11 项应用均为 2–47 个客户端的中心化架构，用于论证联邦学习仍处研究阶段）
+- [P18] Jiang 等，Farm-LightSeek，arXiv 2506.03168（IEEE IoT Magazine 已接收；端侧/边缘轻量 LLM 趋势）
+- [P19] Jacob 等，INT8 整数推理量化，CVPR 2018（量化奠基文献）
+- [O16] John Deere See & Spray 官方新闻稿（2024-09-18）：2024 年超 100 万英亩、相对全面喷施平均节药 59%。素材包当时未能打开该页面，本次在官网 en-us 页面核实
+- [O17] The Things Network 的 LoRaWAN EU868 区域参数（DR5 为 5470 bit/s，单帧应用载荷最大 222 字节，占空比 1%），用于 4.2 节的带宽分析
+- [R06] 中央网信办 2024-06-20 刊文：农业生产信息化率 27.6%（原文未注明统计年份，正文照此表述）
+- [S02] 指导意见原文：2030 年约 35%、2035 年 40% 以上，文号 农市发〔2024〕3号
+
+**原文核对结果**
+
+- P13：UART 4.3 ms、ESP32 控制逻辑+继电器 7.6 ms、闭环 14.8 ms、端到端 36.8 ms、约 150 次呈现中 142 次成功（94.7%）、LoRa 500 m 视距丢包率 <1.2%，均在原文核实。
+- **P10（更正）**：表6 的 15.6 ms 是与其他轻量检测器比较时给出的推理时间，原文**没有**标注为 FP16，素材包写成“FP16 延迟”不准确，正文已按原文改写。另外，表4 确认设备为 **Jetson Orin NX 16GB**（素材包写的是“未充分核定”）。
+- P14：表1 中 10 个 YOLO 变体转为 HEF 前后的 mAP@0.5（下降 0.05–0.21）、延迟与模型大小呈反向关系（YOLOv11x 为 58.8 MB、2.0 ms），均已核实，并据此绘制图12。
+- P12：摘要中“平均 500 ms”与“<15 ms”并存、1.1 MB RAM、<140 mW、7 天部署数据完整率 >95%，均通过 Crossref/Semantic Scholar 的摘要核实。
+- P15：表1、Jetson Nano 与 A100 边缘服务器配置、LoRaWAN（868 MHz、SF7、平均 2.3 KB）、广西 50 公顷半年部署等，均已核实。本文按 LoRaWAN 参数粗算，2.3 KB 至少需分 11 帧、约 3.4 s，与所报 210 ms 端到端时延不自洽，已写入 4.2 节。
+- 全部带 DOI 的参考文献均通过 Crossref 核对了卷、期、文章号与日期；MCUNet 的页码（11711–11722）在 NeurIPS 官方页面核实。
+
+**仍需注意**：厂商数据（See & Spray、LaserWeeder、极飞 P150、各芯片 TOPS）均为厂商口径；ISO 标准只核对了官方目录和摘要。文中已逐处注明这些性质。
+
+## 重新生成（可选）
+
+```bash
+cd review/src
+npm install                      # 安装 docx（v9）
+node build_docx.js --refmap-only # 1) 按首次引用顺序计算参考文献编号 → refmap.json
+python3 make_figures.py          # 2) 生成自绘图（需 matplotlib；中文字体见脚本说明）
+node build_docx.js               # 3) 生成 Word 文档
+python3 render_pdf.py ../嵌入式端边智能赋能智慧农业综述.docx ../预览.pdf   # 4) 可选：LibreOffice 预览
+```
+
+- 正文写在 `src/content.md`，引用写作 `[@P13]`（上标）或 `[#P13]`（正文行内）；图表交叉引用写作 `{fig:key}` / `{tab:key}`。
+- 表格在 `src/tables.js`，参考文献库在 `src/references.js`，编号全部自动生成。

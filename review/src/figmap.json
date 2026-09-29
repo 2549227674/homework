@@ -1,0 +1,122 @@
+{
+ "figures": [
+  {
+   "n": 1,
+   "key": "framework",
+   "file": "fig_framework.png",
+   "caption": "本文的分析框架：农业现场约束驱动端边智能技术，技术体系支撑“感知—决策—执行”闭环应用"
+  },
+  {
+   "n": 2,
+   "key": "hardware",
+   "file": "fig_hardware_spectrum.png",
+   "caption": "典型端边AI硬件平台的标称算力与功耗口径"
+  },
+  {
+   "n": 3,
+   "key": "compression",
+   "file": "fig_compression_taxonomy.png",
+   "caption": "模型轻量化技术的分层分类及其主要收益"
+  },
+  {
+   "n": 4,
+   "key": "pipeline",
+   "file": "fig_deployment_pipeline.png",
+   "caption": "嵌入式AI模型部署工具链与运维闭环"
+  },
+  {
+   "n": 5,
+   "key": "hailo",
+   "file": "paper_P14_fig1_hailo_deployment_flow.jpg",
+   "caption": "杂草检测模型从训练、硬件感知优化到树莓派5加Hailo-8L部署评测的三阶段流程"
+  },
+  {
+   "n": 6,
+   "key": "stack",
+   "file": "fig_software_stack.png",
+   "caption": "面向农业场景的端侧AI嵌入式软件栈与横切关注点"
+  },
+  {
+   "n": 7,
+   "key": "architecture",
+   "file": "fig_cloud_edge_device.png",
+   "caption": "智慧农业端—边—云协同总体架构"
+  },
+  {
+   "n": 8,
+   "key": "maturity",
+   "file": "fig_application_maturity.png",
+   "caption": "智慧农业端边智能代表性系统的任务分布与证据成熟度"
+  },
+  {
+   "n": 9,
+   "key": "pest",
+   "file": "paper_P13_fig2_pest_trap_prototype.jpg",
+   "caption": "水稻害虫识别与物理诱捕原型：（A）样机实物；（B）图像采集、控制、执行与通信模块的连接关系"
+  },
+  {
+   "n": 10,
+   "key": "tomato",
+   "file": "paper_P11_fig3_tomato_robot_hardware.jpg",
+   "caption": "番茄感知机器人的硬件组成：（a）ZED双目相机；（b）Jetson TX2开发板；（c）移动平台"
+  },
+  {
+   "n": 11,
+   "key": "latency",
+   "file": "fig_latency_budget.png",
+   "caption": "时延预算：（a）害虫诱捕原型的时延构成；（b）移动作业中的时延—位移换算（示意）"
+  },
+  {
+   "n": 12,
+   "key": "hailo_quant",
+   "file": "fig_hailo_quant_timing.png",
+   "caption": "Hailo杂草研究中的量化精度损失与计时口径疑点：（a）PyTorch与HEF模型的mAP@0.5；（b）HEF模型大小与报告延迟"
+  },
+  {
+   "n": 13,
+   "key": "precision",
+   "file": "fig_precision_tradeoff.png",
+   "caption": "YOLO-PLNet在Jetson Orin NX上不同数值精度的性能权衡"
+  },
+  {
+   "n": 14,
+   "key": "hybrid",
+   "file": "fig_edge_cloud_hybrid.png",
+   "caption": "本地、云端与端边混合方案的精度、时延与能耗对比"
+  },
+  {
+   "n": 15,
+   "key": "imbalance",
+   "file": "paper_P14_fig2_crop_weed_distribution.jpg",
+   "caption": "杂草检测数据集的类别实例数与作物/杂草构成（作物占79.5%，杂草占20.5%）"
+  },
+  {
+   "n": 16,
+   "key": "timeline",
+   "file": "fig_timeline.png",
+   "caption": "端边智能与智慧农业相关方法、硬件、应用与政策的演进时间线"
+  }
+ ],
+ "tables": [
+  {
+   "n": 1,
+   "key": "hardware",
+   "caption": "典型端边AI硬件平台参数与口径对照"
+  },
+  {
+   "n": 2,
+   "key": "cases",
+   "caption": "智慧农业端边智能代表性系统与案例对比"
+  },
+  {
+   "n": 3,
+   "key": "tradeoff",
+   "caption": "端侧、边缘侧与云端部署方式的多维对比"
+  },
+  {
+   "n": 4,
+   "key": "checklist",
+   "caption": "农业端边智能实验的建议最小报告清单"
+  }
+ ]
+}
