@@ -74,7 +74,7 @@ for (const b of blocks) {
   }
 }
 const unused = Object.keys(REFS).filter((k) => !refNum[k]);
-if (unused.length) console.warn("提示：以下文献未被引用，不会列入参考文献：", unused.join(", "));
+if (unused.length) console.log(`另有 ${unused.length} 条资料未列入 Word 参考文献，完整条目写入 完整来源清单.md`);
 
 // 检查图片脚本中出现的文献键均已在正文中编号
 const figScript = fs.readFileSync(path.join(HERE, "make_figures.py"), "utf8");
@@ -83,6 +83,27 @@ const missing = figKeys.filter((k) => !refNum[k]);
 if (missing.length) throw new Error("图片中引用了正文未引用的文献：" + missing.join(", "));
 
 fs.writeFileSync(path.join(HERE, "refmap.json"), JSON.stringify(refNum, null, 1));
+
+// 完整来源清单：Word 参考文献只列核心学术文献，其余资料在正文中以机构、文件名、产品名或标准号指明；
+// 这里保留全部来源条目，便于核对正文数据的出处。
+{
+  const groups = [["R", "统计与报告"], ["S", "政策与标准"], ["H", "芯片与硬件官方资料"],
+    ["O", "官方技术文档与企业发布"], ["P", "学术论文（通用方法与背景，正文未单独编号）"]];
+  const lines = ["# 完整来源清单", "",
+    `Word 版参考文献只列 ${refOrder.length} 篇核心学术文献（正文中按作者、模型或研究对象具体讨论的论文）。` +
+    "其余资料在正文中已以机构、文件名、产品名或标准号直接指明，下面列出完整条目，便于核对数据出处。", "",
+    `## 一、已列入 Word 参考文献（${refOrder.length} 条，按正文编号）`, ""];
+  refOrder.forEach((k, i) => lines.push(`[${i + 1}] ${REFS[k]}`, ""));
+  lines.push(`## 二、未列入参考文献、在正文中以名称指明的资料（${unused.length} 条）`, "");
+  for (const [prefix, title] of groups) {
+    const ks = unused.filter((k) => k.startsWith(prefix));
+    if (!ks.length) continue;
+    lines.push(`### ${title}`, "");
+    ks.forEach((k) => lines.push(`- ${REFS[k]}`));
+    lines.push("");
+  }
+  fs.writeFileSync(path.join(HERE, "..", "完整来源清单.md"), lines.join("\n"));
+}
 fs.writeFileSync(path.join(HERE, "figmap.json"), JSON.stringify(
   { figures: blocks.filter((b) => b.type === "fig").map((b) => ({ n: figNum[b.key], key: b.key, file: b.file, caption: b.caption })),
     tables: Object.keys(tabNum).map((k) => ({ n: tabNum[k], key: k, caption: TABLES[k].caption })) }, null, 1));

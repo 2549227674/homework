@@ -241,15 +241,15 @@ def fig_compression():
     cols = [
         ("参数/数值层", VIOLET, ["剪枝：非结构化 / 结构化\n（通道、层）", "量化：PTQ（校准）/ QAT；\nINT8、INT4；逐通道/逐张量",
                              "编码压缩：权值共享、\n霍夫曼编码"], "存储↓  分发流量↓",
-         "[P02][P19]\n例：[P10] INT8、[P14] PTQ→HEF"),
+         "[P02]\n例：[P10] INT8、[P14] PTQ→HEF"),
         ("知识层", ORANGE, ["知识蒸馏：云端大模型/集成\n作教师，端侧小模型作学生", "软标签携带类别关系；\n可与量化、剪枝叠加",
-                         "风险：教师偏差、稀有病虫、\n跨季节迁移"], "同等规模下精度↑", "[P03]\n农业设想：云端教师→端侧学生"),
+                         "风险：教师偏差、稀有病虫、\n跨季节迁移"], "同等规模下精度↑", "农业设想：\n云端教师→端侧学生"),
         ("结构层", AQUA, ["轻量网络：深度可分离卷积、\nMobileNetV3、Ghost 模块", "硬件感知 NAS：以目标设备\n时延/内存为约束搜索结构",
                         "TinyNAS：为 MCU 内存\n预算定制网络"], "计算量↓（FLOPs、参数）",
          "[P01][P04]\n例：[P09] MobileNetV2、[P13] Ghost"),
         ("执行/系统层", GREEN, ["图优化与算子融合；\n推理引擎（TensorRT 等）", "内存调度：峰值内存\n（TinyEngine）与张量复用",
                            "优化内核：CMSIS-NN 等；\nCPU/GPU/NPU/DLA 异构调度"], "实测时延↓  峰值内存↓",
-         "[P01][O03][O05]\n须在目标硬件上实测"),
+         "[P01]\n须在目标硬件上实测"),
     ]
     cw, gx = 23.2, 1.4
     x0 = (100 - 4 * cw - 3 * gx) / 2
@@ -359,8 +359,8 @@ def fig_stack():
     ax.text(sx, H - 2.1, "横切关注点（贯穿各层）", fontsize=7.0, weight="bold", color=INK, va="center")
     concerns = [("实时性", RED, "任务优先级与截止期\n看门狗·最坏情况时延\n推理与控制路径分离"),
                 ("功耗", YELLOW, "事件触发与占空比\n休眠唤醒·DVFS\n算力与执行器功率预算"),
-                ("安全", VIOLET, "设备身份·安全启动\n固件/模型签名\n最小权限接口 [S06]"),
-                ("OTA 与运维", BLUE, "A/B 分区·回滚 [O06]\n模型与运行库版本兼容\n灰度发布与状态记录")]
+                ("安全", VIOLET, "设备身份·安全启动\n固件/模型签名\n最小权限接口"),
+                ("OTA 与运维", BLUE, "A/B 分区·失败回滚\n模型与运行库版本兼容\n灰度发布与状态记录")]
     cg = 1.2
     ch = (ytop - y_last - 3 * cg) / 4
     for i, (t, c, d) in enumerate(concerns):
@@ -447,12 +447,12 @@ def fig_maturity():
         (0, 2, "[P12] ESP32-S3 TinyML\n（7 天部署，指标存疑）", "Q", 0.0),
         (1, 1, "[P10] Orin NX，INT8", "R", 0.0),
         (2, 1, "[P14] Pi 5 + Hailo-8L", "R", 0.0),
-        (2, 3, "See & Spray [O16]", "C", 0.18),
-        (2, 3, "LaserWeeder G2 [O12]", "C", -0.18),
+        (2, 3, "See & Spray（Deere）", "C", 0.18),
+        (2, 3, "LaserWeeder G2", "C", -0.18),
         (3, 1, "[P08] Jetson AGX 视频估产", "R", 0.18),
         (3, 1, "[P11] TX2 番茄机器人", "R", -0.18),
         (4, 2, "[P15] Nano + 边缘服务器\n（作者报告半年部署）", "Q", 0.0),
-        (5, 3, "XAG P150 [O11]", "C", 0.0),
+        (5, 3, "极飞 XAG P150", "C", 0.0),
     ]
     style = {"R": ("o", BLUE, BLUE), "Q": ("o", BLUE, SURF), "C": ("s", ORANGE, ORANGE)}
     for row, col, lab, kind, dy in pts:
@@ -677,9 +677,9 @@ def fig_timeline():
     for y in yrs:
         ax.axvline(pos(y), color=GRID, lw=0.5, zorder=0.5)
     ev = [  # (年份, 泳道, 标签, 纵向偏移, 是否目标, 水平对齐)
-        (2015.2, 2.5, "知识蒸馏[P03]", 0.24, False, "center"),
+        (2015.2, 2.5, "知识蒸馏", 0.24, False, "center"),
         (2015.8, 2.5, "Deep Compression[P02]", -0.24, False, "center"),
-        (2017.95, 2.5, "INT8 整数推理[P19]", 0.24, False, "center"),
+        (2017.95, 2.5, "INT8 整数推理", 0.24, False, "center"),
         (2019.35, 2.5, "MobileNetV3[P04]", -0.24, False, "center"),
         (2020.5, 2.5, "MCUNet[P01]", 0.24, False, "center"),
         (2023.0, 2.5, "LiteRT/ONNX Runtime/TensorRT\n等工具链持续演进", -0.26, False, "center"),
@@ -692,8 +692,8 @@ def fig_timeline():
         (2024.94, 1.5, "STM32N6\nOrin Nano Super", 0.24, False, "left"),
         (2021.0, 0.5, "See & Spray 推出", 0.24, False, "center"),
         (2023.3, 0.5, "果园挂果量边缘估测[P08]", -0.24, False, "center"),
-        (2024.72, 0.5, "See & Spray\n超 100 万英亩[O16]", 0.24, False, "right"),
-        (2024.85, 0.5, "指导意见/行动计划[S01][S02]", 0.42, False, "center"),
+        (2024.72, 0.5, "See & Spray\n超 100 万英亩", 0.24, False, "right"),
+        (2024.85, 0.5, "指导意见/行动计划", 0.42, False, "center"),
         (2025.5, 0.5, "[P09][P10][P11] 端侧部署研究", -0.34, False, "left"),
         (2026.45, 0.5, "[P12][P13][P14][P15]\n闭环/协同研究", 0.24, False, "center"),
         (2026.95, 0.5, "信息化率≥30%", -0.20, True, "center"),
