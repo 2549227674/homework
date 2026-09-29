@@ -1,0 +1,12 @@
+{
+  "name": "smart-agri-edge-ai-review",
+  "private": true,
+  "description": "生成《嵌入式端边智能赋能智慧农业》综述 Word 文档",
+  "scripts": {
+    "refmap": "node build_docx.js --refmap-only",
+    "build": "node build_docx.js"
+  },
+  "dependencies": {
+    "docx": "^9.8.1"
+  }
+}
